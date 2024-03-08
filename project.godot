@@ -1,0 +1,26 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Multiplayer Platformer Prototype"
+run/main_scene="res://scenes/Lobby.tscn"
+config/features=PackedStringArray("4.2", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+ArrayFunctions="*res://scripts/ArrayFunctions.gd"
+MultiplayerFunctions="*res://scripts/MultiplayerFunctions.gd"
+Constants="*res://scripts/Constants.gd"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=1

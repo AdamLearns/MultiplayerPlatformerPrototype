@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://mjqacvhlcnba"]
+
+[ext_resource type="Script" path="res://scripts/Lobby.gd" id="1_xubvl"]
+
+[node name="Lobby" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_xubvl")
+
+[node name="UI" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="StatusLabel" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 43.0
+offset_right = 871.0
+offset_bottom = 402.0
+text = "Connecting..."
