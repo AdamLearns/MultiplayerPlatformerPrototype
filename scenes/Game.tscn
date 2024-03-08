@@ -1,12 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://co3gmp5y3g12n"]
+[gd_scene load_steps=4 format=3 uid="uid://co3gmp5y3g12n"]
 
 [ext_resource type="Script" path="res://scripts/Game.gd" id="1_bdye2"]
+[ext_resource type="Texture2D" uid="uid://cr2i1n8sfribl" path="res://icon.svg" id="2_k8vau"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hvwrp"]
+size = Vector2(1142, 63)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_bdye2")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://scenes/Spawnable.tscn")
 spawn_path = NodePath("../SpawnedIcons")
 
 [node name="SpawnedIcons" type="Node2D" parent="."]
+
+[node name="World" type="StaticBody2D" parent="."]
+
+[node name="Sprite" type="Sprite2D" parent="World"]
+position = Vector2(573.5, 644)
+scale = Vector2(8.94531, 0.53125)
+texture = ExtResource("2_k8vau")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World"]
+position = Vector2(575, 646.5)
+shape = SubResource("RectangleShape2D_hvwrp")

@@ -38,10 +38,10 @@ func _host_game() -> void:
 
 # We just assign random names for now, not that they're used anywhere. It's just
 # a placeholder for when we have "real" information to share.
-func _form_player_info() -> Dictionary:
+func _form_player_info(player_instance: Node) -> Dictionary:
 	var possible_names: Array[String] = ["Alice", "Bob", "Carol", "David", "Emily", "Fabien", "Geoffrey", "Hagrid", "Istrid", "Joey"]
 	var random_name: String = ArrayFunctions.random_array_element(possible_names)
-	return {"name": random_name}
+	return {"name": random_name, "player_instance": player_instance}
 
 func _add_player(id: int, player_info: Dictionary) -> void:
 	players[id] = player_info
@@ -70,20 +70,16 @@ func _on_player_connected(id: int) -> void:
 		if !has_node("Game"):
 			print("Switching to game scene")
 			_switch_to_game_scene()
-		$Game.num_nodes_to_add = 3
+		var player_instance: Node = $Game.add_player(id)
 		# Register the newly connecting player with everyone already connected
-		_register_player.rpc(id, _form_player_info())
-	else:
-		# Register my own player info
-		_add_player(multiplayer.get_unique_id(), _form_player_info())
+		_register_player. rpc (id, _form_player_info(player_instance))
 
 func _on_player_disconnected(id: int) -> void:
 	_log_string("Player %s disconnected." % id)
 	players.erase(id)
 
 @rpc("reliable")
-func _register_player(new_player_info: Dictionary) -> void:
-	var new_player_id: int = multiplayer.get_remote_sender_id()
+func _register_player(new_player_id: int, new_player_info: Dictionary) -> void:
 	_log_string("Registering player %s as ID %s" % [new_player_info, new_player_id])
 	_add_player(new_player_id, new_player_info)
 

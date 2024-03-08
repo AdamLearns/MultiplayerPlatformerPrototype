@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://14fxq0ktcg5k"]
+
+[ext_resource type="Texture2D" uid="uid://cr2i1n8sfribl" path="res://icon.svg" id="1_7n3iu"]
+[ext_resource type="Script" path="res://scripts/Player.gd" id="1_v725j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eficr"]
+size = Vector2(128, 127)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_u6nw6"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_v725j")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_7n3iu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_eficr")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_u6nw6")
+
+[node name="IDLabel" type="Label" parent="."]
+offset_left = -46.0
+offset_top = -88.0
+offset_right = 46.0
+offset_bottom = -65.0
+text = "1234567890"
+horizontal_alignment = 1
