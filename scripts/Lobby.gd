@@ -71,18 +71,17 @@ func _on_player_connected(id: int) -> void:
 			print("Switching to game scene")
 			_switch_to_game_scene()
 		$Game.num_nodes_to_add = 3
+		# Register the newly connecting player with everyone already connected
+		_register_player.rpc(id, _form_player_info())
 	else:
 		# Register my own player info
 		_add_player(multiplayer.get_unique_id(), _form_player_info())
-
-	# Register my player info with the newly connecting player
-	_register_player.rpc_id(id, _form_player_info())
 
 func _on_player_disconnected(id: int) -> void:
 	_log_string("Player %s disconnected." % id)
 	players.erase(id)
 
-@rpc("any_peer", "reliable")
+@rpc("reliable")
 func _register_player(new_player_info: Dictionary) -> void:
 	var new_player_id: int = multiplayer.get_remote_sender_id()
 	_log_string("Registering player %s as ID %s" % [new_player_info, new_player_id])
