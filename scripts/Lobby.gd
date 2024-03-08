@@ -72,9 +72,11 @@ func _on_player_connected(id: int) -> void:
 			_switch_to_game_scene()
 		var player_instance: Node = $Game.add_player(id)
 		# Register the newly connecting player with everyone already connected
-		_register_player. rpc (id, _form_player_info(player_instance))
+		_register_player.rpc(id, _form_player_info(player_instance))
 
 func _on_player_disconnected(id: int) -> void:
+	if multiplayer.is_server():
+		$Game.remove_player(id)
 	_log_string("Player %s disconnected." % id)
 	players.erase(id)
 

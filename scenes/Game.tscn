@@ -10,9 +10,9 @@ size = Vector2(1142, 63)
 script = ExtResource("1_bdye2")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-spawn_path = NodePath("../SpawnedIcons")
+spawn_path = NodePath("../SpawnedPlayers")
 
-[node name="SpawnedIcons" type="Node2D" parent="."]
+[node name="SpawnedPlayers" type="Node2D" parent="."]
 
 [node name="World" type="StaticBody2D" parent="."]
 
@@ -24,3 +24,5 @@ texture = ExtResource("2_k8vau")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World"]
 position = Vector2(575, 646.5)
 shape = SubResource("RectangleShape2D_hvwrp")
+
+[connection signal="spawned" from="MultiplayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]

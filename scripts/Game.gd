@@ -17,3 +17,8 @@ func _spawn_player(data: Dictionary) -> Node:
 func add_player(id: int) -> Node:
 	var player_position := Vector2(randi() % 1000, randi() % 500)
 	return $MultiplayerSpawner.spawn({"id": id, "position": player_position})
+
+func remove_player(id: int) -> void:
+	var player := $SpawnedPlayers.get_node_or_null("Player #%s"% id)
+	if player:
+		player.queue_free()
