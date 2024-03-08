@@ -7,7 +7,7 @@
 size = Vector2(128, 127)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_u6nw6"]
-properties/0/path = NodePath(".:position")
+properties/0/path = NodePath(".:sync_pos")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
