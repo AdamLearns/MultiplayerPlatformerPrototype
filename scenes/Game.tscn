@@ -1,10 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://co3gmp5y3g12n"]
 
 [ext_resource type="Script" path="res://scripts/Game.gd" id="1_bdye2"]
-[ext_resource type="Texture2D" uid="uid://cr2i1n8sfribl" path="res://icon.svg" id="2_k8vau"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hvwrp"]
-size = Vector2(1142, 63)
+[ext_resource type="PackedScene" uid="uid://gtappbidhesv" path="res://scenes/Block.tscn" id="2_fhy27"]
+[ext_resource type="PackedScene" uid="uid://ctdmixibfxqkp" path="res://scenes/Platform.tscn" id="3_r235g"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_bdye2")
@@ -14,15 +12,25 @@ spawn_path = NodePath("../SpawnedPlayers")
 
 [node name="SpawnedPlayers" type="Node2D" parent="."]
 
-[node name="World" type="StaticBody2D" parent="."]
+[node name="World" type="Node2D" parent="."]
 
-[node name="Sprite" type="Sprite2D" parent="World"]
-position = Vector2(573.5, 644)
-scale = Vector2(8.94531, 0.53125)
-texture = ExtResource("2_k8vau")
+[node name="Floor" parent="World" instance=ExtResource("2_fhy27")]
+position = Vector2(636, 756)
+scale = Vector2(11.36, 0.73)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World"]
-position = Vector2(575, 646.5)
-shape = SubResource("RectangleShape2D_hvwrp")
+[node name="Block" parent="World" instance=ExtResource("2_fhy27")]
+position = Vector2(290, 542)
+
+[node name="Block2" parent="World" instance=ExtResource("2_fhy27")]
+position = Vector2(897, 322)
+
+[node name="Platform" parent="World" instance=ExtResource("3_r235g")]
+position = Vector2(591, 479)
+
+[node name="Platform2" parent="World" instance=ExtResource("3_r235g")]
+position = Vector2(139, 269)
+
+[node name="Platform3" parent="World" instance=ExtResource("3_r235g")]
+position = Vector2(1121, 131)
 
 [connection signal="spawned" from="MultiplayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]

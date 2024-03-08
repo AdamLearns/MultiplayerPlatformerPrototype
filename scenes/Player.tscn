@@ -12,6 +12,7 @@ properties/0/spawn = true
 properties/0/replication_mode = 1
 
 [node name="Player" type="CharacterBody2D"]
+scale = Vector2(0.4, 0.4)
 script = ExtResource("1_v725j")
 
 [node name="Sprite" type="Sprite2D" parent="."]
